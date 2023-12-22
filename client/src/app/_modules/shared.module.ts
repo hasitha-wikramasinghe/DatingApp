@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-
 @NgModule({
   declarations: [],
   imports: [

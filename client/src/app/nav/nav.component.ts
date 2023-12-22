@@ -23,11 +23,11 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('members')
     }, error => {
-      this._snackBar.open(error.error, 'Ok', {
-        duration: 3000,
-        panelClass: ['blue-snackbar']
-      })
-      console.log(error);
+      console.log(error)
+      // this._snackBar.open(error.error, error.statusText, {
+      //   duration: 3000,
+      //   panelClass: ['blue-snackbar']
+      // })
     })
   }
 
