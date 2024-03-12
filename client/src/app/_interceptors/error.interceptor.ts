@@ -8,14 +8,12 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { NavigationExtras, Router } from '@angular/router';
-import { SnackBarService } from '../_services/snack-bar.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(
-    private router:Router,
-    private snackBar: SnackBarService) {}
+    private router:Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -32,12 +30,12 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 throw modalStateErrors.flat();
               } else {
-                this.snackBar.openSnackBar(error.statusText, 'Close');
+                // toastr error
                 console.log(error.statusText, error.status);
               }
               break;
             case 401:
-              this.snackBar.openSnackBar(error.statusText, 'Close');
+              // toastr error
               console.log(error.statusText, error.status);
               break;
             case 404:

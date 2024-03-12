@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +13,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(public accountService : AccountService, private router: Router, private _snackBar: MatSnackBar) { }
+  constructor(
+    public accountService : AccountService, 
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.setUserSourceNull();
@@ -23,11 +26,8 @@ export class NavComponent implements OnInit {
     this.accountService.login(this.model).subscribe(response => {
       this.router.navigateByUrl('members')
     }, error => {
-      console.log(error)
-      // this._snackBar.open(error.error, error.statusText, {
-      //   duration: 3000,
-      //   panelClass: ['blue-snackbar']
-      // })
+      console.log(error);
+      this.toastr.error(error.error);
     })
   }
 
